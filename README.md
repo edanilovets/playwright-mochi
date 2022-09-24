@@ -9,4 +9,5 @@ pyenv virtualenvs
 ## Working Suite
 ```
 pytest -v tests/mochi --collect-only
+pytest -v tests/mochi --durations=0
 ```
