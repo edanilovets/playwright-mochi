@@ -14,9 +14,7 @@ GITHUB_REPO = "test_repo"
 
 
 @pytest.fixture(scope="session")
-def api_request_context(
-    playwright: Playwright,
-) -> Generator[APIRequestContext, None, None]:
+def api_request_context(playwright: Playwright,) -> Generator[APIRequestContext, None, None]:
     headers = {
         # We set this header per GitHub guidelines.
         "Accept": "application/vnd.github.v3+json",
@@ -32,9 +30,7 @@ def api_request_context(
 
 
 @pytest.fixture(scope="session", autouse=True)
-def create_test_repository(
-    api_request_context: APIRequestContext,
-) -> Generator[None, None, None]:
+def create_test_repository(api_request_context: APIRequestContext,) -> Generator[None, None, None]:
     # Before all
     new_repo = api_request_context.post("/user/repos", data={"name": GITHUB_REPO})
     assert new_repo.ok

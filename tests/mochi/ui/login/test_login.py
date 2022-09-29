@@ -7,8 +7,8 @@ import re
 import pytest
 from playwright.sync_api import Page, expect
 
-from pages.login import LoginPage
-from pages.sidebar import Sidebar
+from src.pages.login import LoginPage
+from src.pages.sidebar import Sidebar
 
 MOCHI_USER = os.getenv("MOCHI_USER")
 MOCHI_PASSWORD = os.getenv("MOCHI_PASSWORD")

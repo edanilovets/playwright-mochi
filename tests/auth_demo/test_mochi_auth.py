@@ -6,7 +6,7 @@ import os
 import pytest
 from playwright.sync_api import expect
 
-MOCHI_USER = os.getenv("MOCHI_USER")
+MOCHI_EMAIL = os.getenv("MOCHI_EMAIL")
 MOCHI_PASSWORD = os.getenv("MOCHI_PASSWORD")
 
 
@@ -18,7 +18,7 @@ def context_creation(playwright):
     # login steps
     page = context.new_page()
     page.goto('https://app.mochi.cards')
-    page.locator("[placeholder=\"Email\"]").fill(MOCHI_USER)
+    page.locator("[placeholder=\"Email\"]").fill(MOCHI_EMAIL)
     page.locator("[placeholder=\"Password\"]").fill(MOCHI_PASSWORD)
     page.locator("button:has-text(\"Log in\")").click()
     account_holder_name = page.locator(".memo_views_side-bar_account_account-holder-name")

@@ -1,8 +1,8 @@
 import pytest
 from playwright.sync_api import Page
 
-from pages.login import LoginPage
-from pages.sidebar import Sidebar
+from src.pages.login import LoginPage
+from src.pages.sidebar import Sidebar
 
 
 @pytest.fixture
