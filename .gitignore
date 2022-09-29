@@ -1,6 +1,7 @@
 # My files
 trace.zip
 secrets.py
+*demo/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
