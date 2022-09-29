@@ -1,10 +1,9 @@
+import base64
 import os
 from typing import Generator
 
 import pytest
 from playwright.sync_api import APIRequestContext, Playwright, expect
-import base64
-
 
 MOCHI_USERNAME = os.getenv("MOCHI_USERNAME")
 MOCHI_EMAIL = os.getenv("MOCHI_EMAIL")
@@ -33,7 +32,7 @@ def context_creation(playwright):
 @pytest.fixture(scope="session")
 def api_request_context(playwright: Playwright) -> Generator[APIRequestContext, None, None]:
     headers = {
-        # "Accept": "application/json",
+        "Accept": "application/json",
         # "Authorization": f"Bearer {TOKEN}"
         "Authorization": f"Basic {MOCHI_API_KEY_BASE64}"
     }
