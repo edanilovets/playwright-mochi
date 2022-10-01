@@ -3,7 +3,10 @@ import os
 from typing import Generator
 
 import pytest
-from playwright.sync_api import APIRequestContext, Playwright, expect
+from playwright.sync_api import APIRequestContext, Page, Playwright, expect
+
+from src.pages.login import LoginPage
+from src.pages.sidebar import Sidebar
 
 MOCHI_USERNAME = os.getenv("MOCHI_USERNAME")
 MOCHI_EMAIL = os.getenv("MOCHI_EMAIL")
@@ -14,6 +17,8 @@ MOCHI_API_KEY_BASE64 = base64.b64encode(bytes(f"{MOCHI_API_KEY}:{MOCHI_PASSWORD}
 
 @pytest.fixture(scope="session")
 def context_creation(playwright):
+
+    # TODO: launch browser depending on --headed option
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
 
@@ -50,3 +55,13 @@ def main_page(context_creation):
 
     yield page
     page.close()
+
+
+@pytest.fixture
+def login_page(page: Page) -> LoginPage:
+    return LoginPage(page)
+
+
+@pytest.fixture
+def sidebar(main_page: Page) -> Sidebar:
+    return Sidebar(main_page)

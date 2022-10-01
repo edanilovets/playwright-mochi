@@ -4,17 +4,17 @@ Login tests suite.
 import os
 import re
 
-import pytest
 from playwright.sync_api import Page, expect
+from pytest import mark
 
 from src.pages.login import LoginPage
-from src.pages.sidebar import Sidebar
 
 MOCHI_USER = os.getenv("MOCHI_USER")
 MOCHI_PASSWORD = os.getenv("MOCHI_PASSWORD")
 
 
-def test_login_with_valid_credentials(page: Page, login_page: LoginPage, sidebar: Sidebar):
+@mark.login
+def test_login_with_valid_credentials(page: Page, login_page: LoginPage):
     login_page.open()
 
     # Expect a title "to contain" a substring.
@@ -23,9 +23,11 @@ def test_login_with_valid_credentials(page: Page, login_page: LoginPage, sidebar
     login_page.login(MOCHI_USER, MOCHI_PASSWORD)
 
     # Expect a account holder name "to contain" a substring.
-    expect(sidebar.account_holder_name).to_have_text("Eugene", use_inner_text=True, timeout=20000)
+    expect(page.locator(
+        ".memo_views_side-bar_account_account-holder-name")).to_have_text("Eugene", use_inner_text=True, timeout=20000)
 
 
+@mark.login
 def test_login_with_invalid_credentials(page: Page, login_page: LoginPage):
     login_page.open()
 
