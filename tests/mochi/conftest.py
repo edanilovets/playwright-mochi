@@ -16,10 +16,7 @@ MOCHI_API_KEY_BASE64 = base64.b64encode(bytes(f"{MOCHI_API_KEY}:{MOCHI_PASSWORD}
 
 
 @pytest.fixture(scope="session")
-def context_creation(playwright):
-
-    # TODO: launch browser depending on --headed option
-    browser = playwright.chromium.launch(headless=False)
+def context_creation(browser):
     context = browser.new_context()
 
     # login steps
